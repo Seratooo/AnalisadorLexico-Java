@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lexico;
 
 /**
@@ -49,7 +45,8 @@ public class tokens {
 
     private int type;
     private String text;
-
+   
+     
     public tokens(){
         super();
     }
@@ -59,8 +56,7 @@ public class tokens {
         return "tokens {" + "type=" + type + ", text=" + text + '}';
     }
     public static void Retorna(tokens tk){
-        
-         //System.out.print( "tokens {" + "type=" + tk.getType() + ", text=" + tk.getText() + "}\n");
+ 
          switch(tk.getType()){
              case 0: 
                  System.out.println("TOK_IDENTIFICADOR ---------  -------- LEXEMA: "+tk.getText());
@@ -151,7 +147,8 @@ public class tokens {
              break;
          }
     }
-
+    
+   
     public void setType(int type) {
         this.type = type;
     }

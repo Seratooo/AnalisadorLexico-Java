@@ -16,16 +16,14 @@ import lexico.tokens;
 public class ClassMain {
     public static void main(String[] args) {
         try{
-            
-        
+   
         scanner sc = new scanner("/home/abubacar-dev/Documentos/arquivo.txt");
-         sc.nextToken();
-           
+        sc.nextToken();
             
         }catch(LexicalException ex){
               System.out.println("Erro Lexico "+ ex.getMessage());
         }catch(Exception ex){
-            System.out.println();
+            System.out.println("AVISO: "+ex);
         }
     }
 }

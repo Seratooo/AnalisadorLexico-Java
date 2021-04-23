@@ -1,20 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package lexico;
 
-
-
 import exceptions.LexicalException;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import static lexico.tokens.Retorna;
+import static main.AnalexForm.WriteToken;
+
 
 /**
  *
@@ -26,14 +20,13 @@ public class scanner {
     private int pos;
     String txtConteudo;
     char currentChar;
-    tokens Token;
+    public tokens Token;
+  
     
     public scanner(String filename){
         try{
              
-            //File file = new File("/home/abubacar-dev/Documentos/arquivo.txt");
-           // txtConteudo = new String(Files.readAllBytes(file.toPath()));
-           txtConteudo = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);       
+            txtConteudo = new String(Files.readAllBytes(Paths.get(filename)), StandardCharsets.UTF_8);       
             System.out.println("------------  ANALISADOR LEXICO -----------");
             System.out.println(txtConteudo);    
             System.out.println("--------------------------------------------");
@@ -45,166 +38,200 @@ public class scanner {
             ex.printStackTrace();
         }
     }
+
+ 
+    public String ReturnConteudo(){
+        return txtConteudo;
+    }
+    public tokens ReurnTokens(){
+        return Token;
+    }
     public void OpenRelatives(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_OPEN_RELATIVES);
                      Token.setText("("); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
      public void CloseRelatives(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_CLOSE_RELATIVES);
                      Token.setText(")"); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
      public void Semicolon(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_SEMICOLON);
                      Token.setText(";"); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
      public void Comma(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_COMMA);
                      Token.setText(","); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
     public void ABreto(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_AB_RETO);
                      Token.setText("["); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
     public void FBreto(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_FB_RETO);
                      Token.setText("]"); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
      public void Point(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_POINT);
                      Token.setText("."); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
      public void OPchaves(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_OPCHAVES);
                      Token.setText("{"); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
      public void CSchaves(){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_CSCHAVES);
                      Token.setText("}"); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
      public void Number(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_NUMBER);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
      public void Atribuicao(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_ATRIBUICAO);
                      Token.setText(term); 
                      Retorna(Token);  
     } public void Adicao(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_ADICAO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
      public void Subtracao(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_SUBTRACAO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
       public void Multiplicacao(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_MULTIPLICACAO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
      public void Divisao(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_DIVISAO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
       public void Maior(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_MAIOR);
                      Token.setText(term); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
        public void Menor(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_MENOR);
                      Token.setText(term); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
         public void NotLogico(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_NOT_LOGICO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
       public void Complemento(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_COMPLEMENTO);
                      Token.setText(term); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
       public void Ternario(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_TERNARIO);
                      Token.setText(term); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
       public void AndLogico(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_AND_LOGICO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
       public void OrLogico(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_OR_LOGICO);
                      Token.setText(term); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
       public void Xor(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_XOR);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
       public void Resto(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_RESTO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
        public void Separador(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_SEPARADOR);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token);
+                     WriteToken(Token);
     }
       public void Arroba(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_ARROBA);
                      Token.setText(term); 
                      Retorna(Token);  
+                     WriteToken(Token);
     }
       public void Comentario(String term){
-                     tokens Token = new tokens();
+                     Token = new tokens();
                      Token.setType(Token.TK_COMENTARIO);
                      Token.setText(term); 
-                     Retorna(Token);  
+                     Retorna(Token); 
+                     WriteToken(Token);
     }
       public void ComentarioPADRAO(char currentChar){
           String term="";        
@@ -228,9 +255,10 @@ public class scanner {
                                 Token.setType(Token.TK_COMENTARIO);
                                 Token.setText(term);
                                 Retorna(Token);
+                                WriteToken(Token);
       }
      public void VerifyIDENT_OR_RESRV(String term){
-                   term = term.trim(); term.toLowerCase();
+                   term = term.trim();
                    Token = new tokens();
                    
                     if(term.equals("int") || term.equals("if") || term.equals("else") || term.equals("abstract") 
@@ -256,8 +284,9 @@ public class scanner {
                          Token.setType(Token.TK_IDENT); 
                     }              
                     Token.setText(term);
-                    Retorna(Token);  
-                   // term="";
+                    Retorna(Token);
+                    WriteToken(Token);
+                    
      }
     public void nextToken(){
         String term="";
@@ -278,6 +307,8 @@ public class scanner {
              switch (estado){
                  case 0:
                      //SE FOR IDENTIFICADOR OU PALAVRA RESERVADA
+                     if(pos == 0){ currentChar =' '; }
+                     
                      if(isChar(currentChar) && currentChar!='{' && currentChar!='}' && currentChar!='[' && currentChar!=']' && !isOperator(currentChar)){
                         do{
                             if(isChar(currentChar) || isDigit(currentChar)){ 
@@ -289,7 +320,9 @@ public class scanner {
                         term="";
                        
                      } else if(currentChar=='"' || isSpace(currentChar) || currentChar=='\''){
-                       
+                       if(isEOF()){
+                           return;
+                       }
                         do{
                           currentChar = nextChar();
                         }while(currentChar==' ');
@@ -565,9 +598,6 @@ public class scanner {
     private char nextChar(){
         return content[pos++];
     }
-   /* private char prevtChar(){
-        return content[pos--];
-    }*/
     private boolean isEOF(){
         return pos == content.length;
     }
