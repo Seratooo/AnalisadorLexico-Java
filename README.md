@@ -1,4 +1,4 @@
 # AnalisadorLexico-Java
 Este analisador lexico foi criado apenas na base de java. 
 
-### Versão 1.1
+### Versão 2.0
