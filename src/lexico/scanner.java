@@ -303,7 +303,6 @@ public class scanner {
              }
            
             // System.out.println("Pos: "+pos+" CHAR: "+currentChar+" ESTADO: "+estado+"\n");
-           // System.out.println("TESTE: "+currentChar);
              switch (estado){
                  case 0:
                      //SE FOR IDENTIFICADOR OU PALAVRA RESERVADA
@@ -315,7 +314,7 @@ public class scanner {
                             term +=currentChar;
                             currentChar = nextChar();
                             }else{
-                                break;
+                                break; 
                             }
                      }while(isChar(currentChar)!=false || isDigit(currentChar)!=false);
                         VerifyIDENT_OR_RESRV(term);
