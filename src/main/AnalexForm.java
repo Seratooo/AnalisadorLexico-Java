@@ -6,6 +6,7 @@
 package main;
 
 import exceptions.LexicalException;
+import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -53,6 +54,7 @@ public class AnalexForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(229, 229, 229));
 
+        txtEscrever.setBackground(new java.awt.Color(201, 201, 201));
         txtEscrever.setText("Escrever COD");
         txtEscrever.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -60,7 +62,8 @@ public class AnalexForm extends javax.swing.JFrame {
             }
         });
 
-        txtAnalisar.setText("Analisar COD");
+        txtAnalisar.setBackground(new java.awt.Color(201, 201, 201));
+        txtAnalisar.setText("Abrir COD");
         txtAnalisar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAnalisarActionPerformed(evt);
@@ -208,7 +211,8 @@ public class AnalexForm extends javax.swing.JFrame {
     private void txtAnalisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAnalisarActionPerformed
         // TODO add your handling code here:
         MyTokens="";
-        txtVerCod.setText("");
+        txtEscrever.setText("Escrever COD");                     
+        txtEscrever.setBackground(Color.decode("#c9c9c9"));
         
          if(txtCod.isEditable()){
                     txtCod.setEditable(false);
@@ -241,7 +245,8 @@ public class AnalexForm extends javax.swing.JFrame {
                 txtVerCod.setText("");
                 
                 txtCod.requestFocusInWindow();
-                
+                txtEscrever.setText("Analisar COD");
+                txtEscrever.setBackground(Color.decode("#d6a0a0"));
                 MyTokens ="";
                 if(!txtCod.isEditable()){
                      txtCod.setEditable(true);
@@ -249,7 +254,7 @@ public class AnalexForm extends javax.swing.JFrame {
                      return;
                 }
                 txtCod.grabFocus();
-   
+                
                 File arquivo  = new File("arquivoDoSistema.txt");
                 
                 try{

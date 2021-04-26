@@ -65,6 +65,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="txtEscrever">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c9" green="c9" red="c9" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Escrever COD"/>
       </Properties>
       <Events>
@@ -73,7 +76,10 @@
     </Component>
     <Component class="javax.swing.JButton" name="txtAnalisar">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Analisar COD"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="c9" green="c9" red="c9" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Abrir COD"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtAnalisarActionPerformed"/>
