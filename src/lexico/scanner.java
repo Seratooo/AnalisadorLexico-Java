@@ -453,11 +453,17 @@ public class scanner {
                              do{
                                term +=currentChar;  
                                currentChar = nextChar(); 
-                             }while((currentChar!='\n'));
+                              
+                               if(isEOF()){
+                                   back();
+                                   break;
+                               }
+                             }while(currentChar!='\n');
+                             
                               Comentario(term);
                               term="";
                          }else if(currentChar == '*'){
-                           
+                           try{
                                 do{
                                     term+=currentChar;
                                     currentChar= nextChar();
@@ -472,6 +478,9 @@ public class scanner {
                                         }
                                     }
                                 }while(true);
+                           }catch(Exception ex){
+                               break;
+                           }
                               Comentario(term);
                               term="";
                                 
