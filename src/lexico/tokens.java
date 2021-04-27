@@ -9,7 +9,7 @@ public class tokens {
     
     public static final int TK_IDENT       = 0;
     public static final int TK_NUMBER      = 1;
-    //public static final int TK_OPERATOR    = 2;
+    public static final int TK_NUMBER_DEC  = 2;
     //public static final int TK_PONCTUATION = 3;
     // public static final int TK_ASSIGN      = 4;
     public static final int TK_RESERVED_WORD= 5;
@@ -62,7 +62,10 @@ public class tokens {
                  System.out.println("TOK_IDENTIFICADOR ---------  -------- LEXEMA: "+tk.getText());
              break;
              case 1: 
-                 System.out.println("TOK_NUM ----------------------------- LEXEMA: "+tk.getText());
+                 System.out.println("TOK_NUM-INT ------------------------- LEXEMA: "+tk.getText());
+             break;
+             case 2: 
+                 System.out.println("TOK_NUM-DEC ------------------------- LEXEMA: "+tk.getText());
              break;
              case 5: 
                  System.out.println("TOK_"+tk.getText().toUpperCase()+" ------------------------- LEXEMA: "+tk.getText());

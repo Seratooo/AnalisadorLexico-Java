@@ -123,7 +123,10 @@ public class AnalexForm extends javax.swing.JFrame {
                  MyTokens+="TOK_IDENTIFICADOR ---------  -------- LEXEMA: "+tk.getText()+"\n";
              break;
              case 1: 
-                 MyTokens+="TOK_NUM ----------------------------- LEXEMA: "+tk.getText()+"\n";
+                 MyTokens+="TOK_NUM-INT -------------------------- LEXEMA: "+tk.getText()+"\n";
+             break;
+             case 2: 
+                 MyTokens+=("TOK_NUM-DEC ------------------------- LEXEMA: "+tk.getText()+"\n");
              break;
              case 5: 
                  MyTokens +="TOK_"+tk.getText().toUpperCase()+" ------------------------- LEXEMA: "+tk.getText()+"\n";

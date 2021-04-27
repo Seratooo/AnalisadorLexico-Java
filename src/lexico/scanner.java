@@ -116,6 +116,13 @@ public class scanner {
                      Retorna(Token);
                      WriteToken(Token);
     }
+     public void NumberDec(String term){
+                     Token = new tokens();
+                     Token.setType(Token.TK_NUMBER_DEC);
+                     Token.setText(term); 
+                     Retorna(Token);
+                     WriteToken(Token);
+    }
      public void Atribuicao(String term){
                      Token = new tokens();
                      Token.setType(Token.TK_ATRIBUICAO);
@@ -555,14 +562,29 @@ public class scanner {
                         }while(currentChar==' ');
                        term="";
 
-                      }else if(isDigit(currentChar) || currentChar=='.'){
+                      }else if(isDigit(currentChar)){
+                          int v =0;
                         do{
-                            if(isDigit(currentChar) || currentChar=='.'){ 
+                            if(isDigit(currentChar)){ 
                             term +=currentChar;
                             currentChar = nextChar();
+                                if(currentChar == '.'){
+                               
+                                currentChar=nextChar();
+                                
+                                if(isDigit(currentChar)){
+                                     term+='.'; v=1;
+                                }else{
+                                    back();
+                                    currentChar ='.';
+                                    break;
+                                }         
+                              }
                             }
-                     }while((isDigit(currentChar)!=false) && (currentChar!='.'));
-                        Number(term);
+                            
+                     }while((isDigit(currentChar)!=false));
+                      if(v==0){  Number(term);}
+                      else{ NumberDec(term); v=0; }
                         term="";
                        
                      }else{
