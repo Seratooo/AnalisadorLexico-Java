@@ -240,30 +240,7 @@ public class scanner {
                      Retorna(Token); 
                      WriteToken(Token);
     }
-      public void ComentarioPADRAO(char currentChar){
-          String term="";        
-          do{
-                        do{
-                             if((isChar(currentChar) || isComment(currentChar) || isDigit(currentChar) ||  isOperator(currentChar) || currentChar !=' ' || currentChar !='\t') && currentChar!='*'){
-                               term +=currentChar; 
-                               currentChar = nextChar();
-                                
-                             } 
-                        }while(currentChar!='*');
-                                term +=currentChar;
-                                currentChar = nextChar();
-                       }while(currentChar !='/');
-                                term+=currentChar;
-                                
-                                System.out.println(term);
-                                currentChar = nextChar();
-                         
-                                Token = new tokens();
-                                Token.setType(Token.TK_COMENTARIO);
-                                Token.setText(term);
-                                Retorna(Token);
-                                WriteToken(Token);
-      }
+      
      public void VerifyIDENT_OR_RESRV(String term){
                    term = term.trim();
                    Token = new tokens();
@@ -470,23 +447,42 @@ public class scanner {
                       }else if(currentChar=='/'){
                           term +=currentChar;
                           
-                          if(nextChar()=='/' && !isEOF()){
-                           do{
-                              if(isChar(currentChar) || isComment(currentChar) || isDigit(currentChar) ||  isOperator(currentChar) || currentChar !=' ' || currentChar !='\t' || currentChar !='*'){
-                              term +=currentChar;
-                              currentChar = nextChar();
-                               }
-                              }while(currentChar !='\n');
+                         currentChar = nextChar();
+                        
+                         if(currentChar =='/'){
+                             do{
+                               term +=currentChar;  
+                               currentChar = nextChar(); 
+                             }while((currentChar!='\n'));
                               Comentario(term);
                               term="";
-                              break;
-                          }
-                         else{
-                               Divisao(term);
-                          }    
-                       
+                         }else if(currentChar == '*'){
+                           
+                                do{
+                                    term+=currentChar;
+                                    currentChar= nextChar();
+                                    if(currentChar=='*'){
+                                        do{
+                                        term+=currentChar;
+                                        currentChar= nextChar();
+                                        }while(currentChar=='*');
+                                        if(currentChar=='/'){
+                                            term+=currentChar;
+                                            break;
+                                        }
+                                    }
+                                }while(true);
+                              Comentario(term);
+                              term="";
+                                
+                         }else{
+                             Divisao(term);
+                             back();
+                         }
+                      
                        do{
                           currentChar = nextChar();
+                                                   
                         }while(currentChar==' ');
                        term="";
 
@@ -631,5 +627,3 @@ public class scanner {
        pos--;
     }
 }
-
-//COMENTARIOS /* */ - / NUMEROS DECIMAIS
