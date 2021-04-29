@@ -40,7 +40,7 @@ TOK_F-CHAVES ------------------------ LEXEMA: }
 ### Versão 1.1
 + Versão em linha de comando
 ### Versão 2.0
-+ Bug de Numeros inteiros e decimais resolvidos
++ Bug de Numeros inteiros e decimais resolvido
 + Bug dos Parênteses resolvido
 + Interface Adicionada
 ### Versão 2.3 (Atual)
