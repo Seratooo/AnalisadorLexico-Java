@@ -5,8 +5,8 @@ da linguagem java.
 ## Funcionamento
 Este analisador, verifica caracter por caracter digitado no programa
 ou ainda num ficheiro de texto, e gera tokens correnspondes a conjuntos
-de caracteres ou a um caracter que corresponde a estrutura lêxica
-linguagem Java da linguagem java.
+de caracteres ou a um caracter que corresponde a estrutura lêxica da
+linguagem Java.
 
 ### Exemplo - ENTRADA
 
