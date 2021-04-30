@@ -20,7 +20,8 @@ public class scanner {
     String txtConteudo;
     char currentChar;
     public tokens Token;
-
+    
+    //ABRE O FICHEIRO E CONVERTE NO FORMATO STRING
     public scanner(String filename) {
         try {
 
@@ -36,15 +37,15 @@ public class scanner {
             ex.printStackTrace();
         }
     }
-
+    //RETORNA O CONTEÚDO DO FICHEIRO LIDO
     public String ReturnConteudo() {
         return txtConteudo;
     }
-
+    //TORNA OS TOKENS
     public tokens ReurnTokens() {
         return Token;
     }
-
+    //RETORNA O RESULTADO DO TOKEN ABRIR PARÊNTESES
     public void OpenRelatives() {
         Token = new tokens();
         Token.setType(Token.TK_OPEN_RELATIVES);
@@ -52,7 +53,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN FECHAR PARÊNTESES
     public void CloseRelatives() {
         Token = new tokens();
         Token.setType(Token.TK_CLOSE_RELATIVES);
@@ -60,7 +61,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN PONTO E VÍRGULA
     public void Semicolon() {
         Token = new tokens();
         Token.setType(Token.TK_SEMICOLON);
@@ -68,7 +69,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN VÍRGULA
     public void Comma() {
         Token = new tokens();
         Token.setType(Token.TK_COMMA);
@@ -76,7 +77,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN ABRIR PARÊNTESES RETO
     public void ABreto() {
         Token = new tokens();
         Token.setType(Token.TK_AB_RETO);
@@ -84,7 +85,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN FECHAR PARÊNTESES RETO
     public void FBreto() {
         Token = new tokens();
         Token.setType(Token.TK_FB_RETO);
@@ -92,7 +93,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN PONTO
     public void Point() {
         Token = new tokens();
         Token.setType(Token.TK_POINT);
@@ -100,7 +101,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN ABRIR CHAVES
     public void OPchaves() {
         Token = new tokens();
         Token.setType(Token.TK_OPCHAVES);
@@ -108,7 +109,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN FECHAR CHAVES
     public void CSchaves() {
         Token = new tokens();
         Token.setType(Token.TK_CSCHAVES);
@@ -116,7 +117,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN NUMERO INTEIRO
     public void Number(String term) {
         Token = new tokens();
         Token.setType(Token.TK_NUMBER);
@@ -124,7 +125,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN NUMERO DECIMAL
     public void NumberDec(String term) {
         Token = new tokens();
         Token.setType(Token.TK_NUMBER_DEC);
@@ -132,14 +133,14 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE ATRIBUICAO
     public void Atribuicao(String term) {
         Token = new tokens();
         Token.setType(Token.TK_ATRIBUICAO);
         Token.setText(term);
         Retorna(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE ADICAO
     public void Adicao(String term) {
         Token = new tokens();
         Token.setType(Token.TK_ADICAO);
@@ -147,7 +148,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE SUBTRACAO
     public void Subtracao(String term) {
         Token = new tokens();
         Token.setType(Token.TK_SUBTRACAO);
@@ -155,7 +156,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE MULTIPLICACAO
     public void Multiplicacao(String term) {
         Token = new tokens();
         Token.setType(Token.TK_MULTIPLICACAO);
@@ -163,7 +164,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE DIVISAO
     public void Divisao(String term) {
         Token = new tokens();
         Token.setType(Token.TK_DIVISAO);
@@ -171,7 +172,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE MAIOR
     public void Maior(String term) {
         Token = new tokens();
         Token.setType(Token.TK_MAIOR);
@@ -179,7 +180,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE MENOR
     public void Menor(String term) {
         Token = new tokens();
         Token.setType(Token.TK_MENOR);
@@ -187,7 +188,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN NEGACAO
     public void NotLogico(String term) {
         Token = new tokens();
         Token.setType(Token.TK_NOT_LOGICO);
@@ -195,7 +196,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SINAL DE COMPLEMENTO
     public void Complemento(String term) {
         Token = new tokens();
         Token.setType(Token.TK_COMPLEMENTO);
@@ -203,7 +204,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN TERNARIO
     public void Ternario(String term) {
         Token = new tokens();
         Token.setType(Token.TK_TERNARIO);
@@ -211,7 +212,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN AND
     public void AndLogico(String term) {
         Token = new tokens();
         Token.setType(Token.TK_AND_LOGICO);
@@ -219,7 +220,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN OR
     public void OrLogico(String term) {
         Token = new tokens();
         Token.setType(Token.TK_OR_LOGICO);
@@ -227,7 +228,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN XOR
     public void Xor(String term) {
         Token = new tokens();
         Token.setType(Token.TK_XOR);
@@ -235,7 +236,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN RESTO
     public void Resto(String term) {
         Token = new tokens();
         Token.setType(Token.TK_RESTO);
@@ -243,7 +244,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN SEPARADOR
     public void Separador(String term) {
         Token = new tokens();
         Token.setType(Token.TK_SEPARADOR);
@@ -251,7 +252,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN @
     public void Arroba(String term) {
         Token = new tokens();
         Token.setType(Token.TK_ARROBA);
@@ -259,7 +260,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN COMENTARIO
     public void Comentario(String term) {
         Token = new tokens();
         Token.setType(Token.TK_COMENTARIO);
@@ -267,7 +268,7 @@ public class scanner {
         Retorna(Token);
         WriteToken(Token);
     }
-
+    //RETORNA O RESULTADO DO TOKEN PALAVRA RESERVADA OU IDENTIFICADOR
     public void VerifyIDENT_OR_RESRV(String term) {
         term = term.trim();
         Token = new tokens();
@@ -299,29 +300,25 @@ public class scanner {
         WriteToken(Token);
 
     }
-
+    //FUNCAO PRINCIPAL
     public void nextToken() {
         String term = "";
         if (isEOF()) {
             pos = 0;
         }
         estado = 0;
-
         currentChar = content[pos];
         while (pos < txtConteudo.length()) {
-
             if (currentChar == ' ' || isSpace(currentChar)) {
                 currentChar = nextChar();
             }
-
-            // System.out.println("Pos: "+pos+" CHAR: "+currentChar+" ESTADO: "+estado+"\n");
             switch (estado) {
                 case 0:
-                    //SE FOR IDENTIFICADOR OU PALAVRA RESERVADA
+                    //LIMPA A VARIÁVEL QUE RECEBERÁ OS CARATECTERES NA POSICAO 0
                     if (pos == 0) {
                         currentChar = ' ';
                     }
-
+                    //FUNCAO QUE VERIFICA IDENTIFICADOR OU PALAVRA RESERVADA
                     if (isChar(currentChar) && !isOperator(currentChar) && !isRelatives(currentChar)) {
                         do {
                             if ((isChar(currentChar) || isDigit(currentChar)) && !isRelatives(currentChar)) {
@@ -333,7 +330,7 @@ public class scanner {
                         } while (isChar(currentChar) != false || isDigit(currentChar) != false);
                         VerifyIDENT_OR_RESRV(term);
                         term = "";
-
+                      //FUNCAO QUE VERIFICA SE EXISTE ESPAÇOS EM BRANCO E OUTROS CARACTERES INVÁLIDOS
                     } else if (currentChar == '"' || isSpace(currentChar) || currentChar == '\'') {
                         if (isEOF()) {
                             return;
@@ -342,7 +339,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE :
                     } else if (currentChar == ':') {
                         term += currentChar;
                         Separador(term);
@@ -351,7 +348,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA D0 @
                     } else if (currentChar == '@') {
                         term += currentChar;
                         Separador(term);
@@ -360,7 +357,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE (
                     } else if (currentChar == '(') {
                         OpenRelatives();
                         term += currentChar;
@@ -369,7 +366,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE )
                     } else if (currentChar == ')') {
                         CloseRelatives();
                         term += currentChar;
@@ -378,7 +375,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE ;
                     } else if (currentChar == ';') {
                         Semicolon();
                         term += currentChar;
@@ -387,7 +384,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE ,
                     } else if (currentChar == ',') {
                         Comma();
                         term += currentChar;
@@ -396,7 +393,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE {
                     } else if (currentChar == '{') {
                         OPchaves();
                         term += currentChar;
@@ -405,7 +402,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE }
                     } else if (currentChar == '}') {
                         CSchaves();
                         term += currentChar;
@@ -414,7 +411,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE [
                     } else if (currentChar == '[') {
                         ABreto();
                         term += currentChar;
@@ -423,7 +420,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE ]
                     } else if (currentChar == ']') {
                         FBreto();
                         term += currentChar;
@@ -432,7 +429,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE .
                     } else if (currentChar == '.') {
                         Point();
                         term += currentChar;
@@ -441,7 +438,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE +
                     } else if (currentChar == '+') {
                         term += currentChar;
                         Adicao(term);
@@ -449,7 +446,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE -
                     } else if (currentChar == '-') {
                         term += currentChar;
                         Subtracao(term);
@@ -457,7 +454,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE =
                     } else if (currentChar == '=') {
                         term += currentChar;
                         Atribuicao(term);
@@ -465,7 +462,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE *
                     } else if (currentChar == '*') {
                         term += currentChar;
                         Multiplicacao(term);
@@ -473,12 +470,12 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE /
                     } else if (currentChar == '/') {
                         term += currentChar;
 
                         currentChar = nextChar();
-
+                     //VERIFICA A OCORRENCIA DE // (COMENTARIO)
                         if (currentChar == '/') {
                             do {
                                 term += currentChar;
@@ -489,9 +486,10 @@ public class scanner {
                                     break;
                                 }
                             } while (currentChar != '\n');
-
                             // Comentario(term);
                             term = "";
+                            
+                          //VERIFICA A OCORRENCIA DE /* (COMENTARIO)
                         } else if (currentChar == '*') {
                             try {
                                 do {
@@ -518,13 +516,13 @@ public class scanner {
                             Divisao(term);
                             back();
                         }
-
                         do {
                             currentChar = nextChar();
 
                         } while (currentChar == ' ');
                         term = "";
 
+                    //VERIFICA A OCORRENCIA DE >
                     } else if (currentChar == '>') {
                         term += currentChar;
                         Maior(term);
@@ -532,7 +530,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE <
                     } else if (currentChar == '<') {
                         term += currentChar;
                         Menor(term);
@@ -540,7 +538,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE !
                     } else if (currentChar == '!') {
                         term += currentChar;
                         NotLogico(term);
@@ -548,7 +546,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE ~
                     } else if (currentChar == '~') {
                         term += currentChar;
                         Complemento(term);
@@ -556,7 +554,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE ?
                     } else if (currentChar == '?') {
                         term += currentChar;
                         Ternario(term);
@@ -564,7 +562,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE &
                     } else if (currentChar == '&') {
                         term += currentChar;
                         AndLogico(term);
@@ -572,7 +570,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE |
                     } else if (currentChar == '|') {
                         term += currentChar;
                         OrLogico(term);
@@ -580,7 +578,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE ^
                     } else if (currentChar == '^') {
                         term += currentChar;
                         Xor(term);
@@ -588,7 +586,7 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A OCORRENCIA DE %
                     } else if (currentChar == '%') {
                         term += currentChar;
                         Resto(term);
@@ -596,13 +594,14 @@ public class scanner {
                             currentChar = nextChar();
                         } while (currentChar == ' ');
                         term = "";
-
+                     //VERIFICA A SE É NÚMERO INTEIRO
                     } else if (isDigit(currentChar)) {
                         int v = 0;
                         do {
                             if (isDigit(currentChar)) {
                                 term += currentChar;
                                 currentChar = nextChar();
+                              //VERIFICA SE PODE SER NUMERO DECIMAL
                                 if (currentChar == '.') {
 
                                     currentChar = nextChar();
@@ -626,7 +625,7 @@ public class scanner {
                             v = 0;
                         }
                         term = "";
-
+                     //SE NEM 1 DAS OPCOES FOR VALIDA
                     } else {
                         estado = 0;
                         term = "";
@@ -639,41 +638,41 @@ public class scanner {
         }
 
     }
-
+   //VERIFICA SE É COMENTARIO
     private boolean isComment(char c) {
         return c == '/';
     }
-
+   //VERIFICA SE É DIGITO
     private boolean isDigit(char c) {
         return c >= '0' & c <= '9';
     }
-
+   //VERIFICA SE É PARÊNTESES
     private boolean isRelatives(char c) {
         return c == '[' || c == ']' || c == '{' || c == '}';
     }
-
+   //VERIFICA SE É CARACTER
     private boolean isChar(char c) {
         return (c >= 'a' && c <= 'z') || (c >= 'A' && c >= 'Z');
     }
-
+   //VERIFICA SE É OPERADOR
     private boolean isOperator(char c) {
         return c == '>' || c == '<' || c == '=' || c == '!' || c == '+' || c == '-' || c == '~' || c == '?'
                 || c == '&' || c == '|' || c == '^' || c == '%' || c == '*' || c == '/';
     }
-
+   //VERIFICA SE É ESPAÇO
     private boolean isSpace(char c) {
         return c == ' ' || c == '\t' || c == '\n' || c == '\r';
 
     }
-
+   //AVANÇA PARA PROXIMO CARATER
     private char nextChar() {
         return content[pos++];
     }
-
+   //VERIFICA SE É O FINAL DO ARQUIVO
     private boolean isEOF() {
         return pos == content.length;
     }
-
+   //VOLTA UMA POSICAO NO CONTADOR DO ARQUIVO
     private void back() {
         pos--;
     }
