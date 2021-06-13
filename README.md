@@ -46,5 +46,6 @@ TOK_F-CHAVES ------------------------ LEXEMA: }
 ### Versão 2.3 (Atual)
 + Tratamento de erros melhorado
 + Bugs de comentarios resolvido
++ Adicionando comentários ao código
 
 <img src="./Analisador.png" alt="Analisador Léxico"> 
