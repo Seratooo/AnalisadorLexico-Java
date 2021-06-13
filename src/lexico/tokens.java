@@ -1,6 +1,8 @@
 
 package lexico;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author abubacar-dev
@@ -41,18 +43,21 @@ public class tokens {
 
     private int type;
     private String text;
-   
+
+    private int line;
+    private int column;
+    public static ArrayList<tokens> listaDeTokens = new ArrayList<>();
      
     public tokens(){
         super();
     }
-
+    
     @Override
     public String toString() {
         return "tokens {" + "type=" + type + ", text=" + text + '}';
     }
     public static void Retorna(tokens tk){
- 
+         listaDeTokens.add(tk);
          switch(tk.getType()){
              case 0: 
                  System.out.println("TOK_IDENTIFICADOR ---------  -------- LEXEMA: "+tk.getText());
@@ -169,6 +174,25 @@ public class tokens {
         this.type = type;
         this.text = text;
     }
+        public int getLine() {
+        return line;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
+    }
+
+    public void setColumn(int column) {
+        this.column = column;
+    }
     
+    public static void lista(){
+        System.out.print(listaDeTokens.get(0).getText());
+    }
+        
     
 }

@@ -20,7 +20,8 @@ public class scanner {
     String txtConteudo;
     char currentChar;
     public tokens Token;
-    
+    private int line=1;      
+
     //ABRE O FICHEIRO E CONVERTE NO FORMATO STRING
     public scanner(String filename) {
         try {
@@ -50,6 +51,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_OPEN_RELATIVES);
         Token.setText("(");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -58,6 +60,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_CLOSE_RELATIVES);
         Token.setText(")");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -66,6 +69,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_SEMICOLON);
         Token.setText(";");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -74,6 +78,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_COMMA);
         Token.setText(",");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -82,6 +87,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_AB_RETO);
         Token.setText("[");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -90,6 +96,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_FB_RETO);
         Token.setText("]");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -98,6 +105,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_POINT);
         Token.setText(".");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -106,6 +114,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_OPCHAVES);
         Token.setText("{");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -114,6 +123,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_CSCHAVES);
         Token.setText("}");
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -122,6 +132,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_NUMBER);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -130,6 +141,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_NUMBER_DEC);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -138,13 +150,16 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_ATRIBUICAO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
+        WriteToken(Token);
     }
     //RETORNA O RESULTADO DO TOKEN SINAL DE ADICAO
     public void Adicao(String term) {
         Token = new tokens();
         Token.setType(Token.TK_ADICAO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -153,6 +168,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_SUBTRACAO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -161,6 +177,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_MULTIPLICACAO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -169,6 +186,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_DIVISAO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -177,6 +195,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_MAIOR);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -185,6 +204,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_MENOR);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -193,6 +213,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_NOT_LOGICO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -201,6 +222,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_COMPLEMENTO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -209,6 +231,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_TERNARIO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -217,6 +240,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_AND_LOGICO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -225,6 +249,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_OR_LOGICO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -233,6 +258,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_XOR);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -241,6 +267,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_RESTO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -249,6 +276,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_SEPARADOR);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -257,6 +285,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_ARROBA);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -265,6 +294,7 @@ public class scanner {
         Token = new tokens();
         Token.setType(Token.TK_COMENTARIO);
         Token.setText(term);
+        Token.setLine(line);
         Retorna(Token);
         WriteToken(Token);
     }
@@ -290,10 +320,12 @@ public class scanner {
                 || term.equals("opens") || term.equals("to") || term.equals("uses") || term.equals("provides")
                 || term.equals("with") || term.equals("while")) {
             Token.setType(Token.TK_RESERVED_WORD);
+            Token.setLine(line);
         } else if (term.contains("/")) {
             throw new LexicalException("Identificador Invalido");
         } else {
             Token.setType(Token.TK_IDENT);
+            Token.setLine(line);
         }
         Token.setText(term);
         Retorna(Token);
@@ -661,6 +693,9 @@ public class scanner {
     }
    //VERIFICA SE É ESPAÇO
     private boolean isSpace(char c) {
+        if(c=='\n' || c=='\r'){
+            line++;
+        }
         return c == ' ' || c == '\t' || c == '\n' || c == '\r';
 
     }

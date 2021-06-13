@@ -6,8 +6,10 @@
 package main;
 
 import exceptions.LexicalException;
+import exceptions.SintaxeException;
 import lexico.scanner;
 import lexico.tokens;
+import parser.isParser;
 
 /**
  *
@@ -16,12 +18,22 @@ import lexico.tokens;
 public class ClassMain {
     public static void main(String[] args) {
         try{
-   
+                
         scanner sc = new scanner("/home/abubacar-dev/Documentos/arquivo.txt");
-        sc.nextToken();
+         sc.nextToken();
+        isParser parser = new isParser(sc);
+       // parser.E();
+       // tokens.lista();
+      //  parser.VarDeclaration();
+      //parser.E();
+     // parser.classFunc();
+     // parser.MethodFunc();
+     parser.constructFunc();
             
         }catch(LexicalException ex){
-              System.out.println("Erro Lexico "+ ex.getMessage());
+              System.out.println("Erro Lexico: "+ ex.getMessage());
+        }catch(SintaxeException ex){
+              System.out.println("Erro Sitático: "+ ex.getMessage());
         }catch(Exception ex){
             System.out.println("AVISO: "+ex);
         }
