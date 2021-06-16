@@ -27,9 +27,15 @@ public class ClassMain {
       //  parser.VarDeclaration();
       //parser.E();
      // parser.classFunc();
-     // parser.MethodFunc();
-     parser.constructFunc();
-            
+     //parser.MethodFunc();
+    // parser.constructFunc();
+    
+    do{
+        parser.VerifySintaxe();
+    }while(true);
+     
+    //parser.importFunc();
+    
         }catch(LexicalException ex){
               System.out.println("Erro Lexico: "+ ex.getMessage());
         }catch(SintaxeException ex){
