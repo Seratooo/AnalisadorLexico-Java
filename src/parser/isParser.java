@@ -22,6 +22,8 @@ public class isParser {
     int pos = 0;
     String modifiers = "public private static abstract final protected native synchronized transient volatile";
     String types = "int boolean float double string";
+    String typesFunc = "int boolean float double string void";
+
 
     public isParser(scanner isScaner) {
         this.isScanner = isScaner;
@@ -80,7 +82,14 @@ public class isParser {
     private void Type() {
         token = listaDeTokens.get(pos);
         pos++;
-        if (token.getType() != 5) {
+        if (!types.contains(token.getText())){
+            throw new SintaxeException("Tipo de dados invalido: " + token.getLine() + " : " + token.getText());
+        }
+    }
+    private void TypeFunc() {
+        token = listaDeTokens.get(pos);
+        pos++;
+        if (!typesFunc.contains(token.getText())){
             throw new SintaxeException("Tipo de dados invalido: " + token.getLine() + " : " + token.getText());
         }
     }
@@ -171,7 +180,7 @@ public class isParser {
     public void Modifiers() {
         modifier();
         ml();
-        Type();
+        TypeFunc();
     }
 
     private void modifier() {
@@ -225,32 +234,42 @@ public class isParser {
         do{
               if (modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() != 0) {
                     int i = pos;
-                    do {
-                          i++;
-                     } while (listaDeTokens.get(i).getType() != 0);
 
+                  try{
+                        do {
+                              i++;
+                         } while (listaDeTokens.get(i).getType() != 0);
+                  }catch(Exception e){
+                         pos++;
+                         VarDeclaration();
+                  }
+                                        
                     if (listaDeTokens.get(i + 1).getType() == 7) {
                           pos++;
                           MethodFunc();
-                    } else {
+                    }else {
                           pos++;
                           VarDeclaration();
                     }
             }
               
-            if (types.contains(listaDeTokens.get(pos + 1).getText())
+            else if (types.contains(listaDeTokens.get(pos + 1).getText())
               && listaDeTokens.get(pos + 2).getType() == 0
               && listaDeTokens.get(pos + 3).getType() == 9) {
                 pos++;
                 VarDeclaration();
             }
                 
-           if (listaDeTokens.get(pos + 1).getType() == 5
+          else if (listaDeTokens.get(pos + 1).getType() == 5
              && listaDeTokens.get(pos + 2).getType() == 0
              && listaDeTokens.get(pos + 3).getType() == 7) {
                 pos++;
                 MethodFunc();
             }
+          else{
+             pos++;
+             VarDeclaration(); 
+          }
            
         } while (listaDeTokens.get(pos + 1).getType() != 13);
         fecharChaves();
@@ -300,12 +319,12 @@ public class isParser {
 
     //VERIFICANDO CLASS
     public void classFunc() {
-        Modifiers();
+        modifier();
         Class();
     }
 
     private void Class() {
-        pos--;
+    
         token = listaDeTokens.get(pos);
         if (!token.getText().equals("class")) {
             throw new SintaxeException("Esperava class na linha " + token.getLine() + " encontrei : " + token.getText());
@@ -337,7 +356,7 @@ public class isParser {
                 constructFunc();
             }
             
-            if (modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() != 0) {
+            else if (modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() != 0) {
                 int i = pos;
                 do {
                     i++;
@@ -352,20 +371,23 @@ public class isParser {
                 }
             }
          //METODOS E DECLARACOES SEM MODIFICADORES DE ACESSO
-            if (types.contains(listaDeTokens.get(pos + 1).getText())
+           else if (types.contains(listaDeTokens.get(pos + 1).getText())
                     && listaDeTokens.get(pos + 2).getType() == 0
-                    && listaDeTokens.get(pos + 3).getType() == 9) {
+                    && listaDeTokens.get(pos + 3).getType() != 7) {
                 pos++;
                 VarDeclaration();
             }
 
-            if (listaDeTokens.get(pos + 1).getType() == 5
+           else if (typesFunc.contains(listaDeTokens.get(pos + 1).getText())
                     && listaDeTokens.get(pos + 2).getType() == 0
-                    && listaDeTokens.get(pos + 3).getType() == 7) {
+                    && listaDeTokens.get(pos + 3).getType() != 9) {
                 pos++;
                 MethodFunc();
             }
-
+           else{
+               pos++;
+               VarDeclaration();
+           }   
         } while (listaDeTokens.get(pos + 1).getType() != 13);
 
         fecharChaves();
@@ -384,7 +406,7 @@ public class isParser {
     }
 
     private void method() {
-        Type();
+        TypeFunc();
         methodDef();
         if ("throws".equals(listaDeTokens.get(pos + 1).getText())) {
             pos++;
@@ -402,11 +424,14 @@ public class isParser {
     }
     
     private void methodBody() {
-       
+      
         if(listaDeTokens.get(pos+1).getType()==9){
             semicolun();
         }else{
+                        
             abrirChaves();
+            
+            try{
             
             do{
                 //VARIAVEL LOCAL
@@ -418,6 +443,10 @@ public class isParser {
             }
                 
             } while (listaDeTokens.get(pos + 1).getType() != 13);
+            
+            }catch(Exception e){
+                fecharChaves(); 
+            }
             
             fecharChaves(); 
         }
@@ -521,29 +550,34 @@ public class isParser {
                 callTheNext();
             }
 
-            if (token.getText().equals("import")) {
+           else if (token.getText().equals("import")) {
                 do {
                     importFunc();
                 } while (token.getType() != 9);
                 callTheNext();
             }
 
-            if (modifiers.contains(token.getText())) {
+           else if (modifiers.contains(token.getText())) {
                 if (listaDeTokens.get(pos + 1).getText().equals("class")) {
                     do {
                         classFunc();
                     } while (token.getType() != 13);
                     callTheNext();
+                }else{
+                   throw new SintaxeException("Palavra não reconhecida na linha: "+token.getLine());   
                 }
 
             }
             
-            if(token.getText().equals("interface")){
+          else  if(token.getText().equals("interface")){
                 do{
                     interfaceFunc(); 
                 }while(token.getType() != 13);
                 callTheNext();
             }
+          else{
+              throw new SintaxeException("Palavra não reconhecida na linha: "+token.getLine());  
+          }
 
         }
     }

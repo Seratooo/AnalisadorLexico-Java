@@ -24,7 +24,7 @@ public class ClassMain {
         isParser parser = new isParser(sc);
        // parser.E();
        // tokens.lista();
-      //  parser.VarDeclaration();
+        //parser.VarDeclaration();
       //parser.E();
      // parser.classFunc();
      //parser.MethodFunc();
