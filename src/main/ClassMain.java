@@ -7,6 +7,7 @@ package main;
 
 import exceptions.LexicalException;
 import exceptions.SintaxeException;
+import static exceptions.SintaxeException.erros;
 import lexico.scanner;
 import lexico.tokens;
 import parser.isParser;
@@ -20,28 +21,35 @@ public class ClassMain {
         try{
                 
         scanner sc = new scanner("/home/abubacar-dev/Documentos/arquivo.txt");
-         sc.nextToken();
+        sc.nextToken();
         isParser parser = new isParser(sc);
        // parser.E();
        // tokens.lista();
-        //parser.VarDeclaration();
       //parser.E();
+      //parser.constructFunc();
+      // parser.VarDeclaration();     
      // parser.classFunc();
      //parser.MethodFunc();
+   // parser.interfaceFunc();
     // parser.constructFunc();
-    
+      //   parser.packegeFunc();
+         //parser.importFunc();
+
     do{
-        parser.VerifySintaxe();
+       parser.VerifySintaxe();
     }while(true);
+// parser.interfaceFunc();
      
     //parser.importFunc();
     
         }catch(LexicalException ex){
               System.out.println("Erro Lexico: "+ ex.getMessage());
-        }catch(SintaxeException ex){
+        }/*catch(SintaxeException ex){
               System.out.println("Erro Sitático: "+ ex.getMessage());
-        }catch(Exception ex){
-            System.out.println("AVISO: "+ex);
+        }*/catch(Exception ex){
+           // System.out.println("AVISO: "+ex);
         }
+        erros();
+        }
+
     }
-}

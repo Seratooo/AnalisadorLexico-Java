@@ -10,8 +10,19 @@ package exceptions;
  * @author abubacar-dev
  */
 public class SintaxeException extends RuntimeException{
-
-    public SintaxeException(String msg){
-        super(msg);
+    public static String errors="";
+    public static int qnt=0;
+    public static void SintaxeException(String msg){
+        if(!errors.contains(msg)){
+             //System.out.println(msg);
+             errors+=msg+"\n";
+             qnt++;
+        }
+       
+    }
+    public static void erros(){
+        System.out.println();
+        System.out.println(errors);
+        System.out.println("Quantidade de Erros: "+qnt);
     }
 }

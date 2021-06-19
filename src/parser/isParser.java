@@ -6,6 +6,7 @@
 package parser;
 
 import exceptions.SintaxeException;
+import static exceptions.SintaxeException.SintaxeException;
 import java.util.ArrayList;
 import lexico.scanner;
 import lexico.tokens;
@@ -23,7 +24,7 @@ public class isParser {
     String modifiers = "public private static abstract final protected native synchronized transient volatile";
     String types = "int boolean float double string";
     String typesFunc = "int boolean float double string void";
-
+    
 
     public isParser(scanner isScaner) {
         this.isScanner = isScaner;
@@ -54,7 +55,7 @@ public class isParser {
     private void T() {
         token = listaDeTokens.get(pos);
         if (token.getType() != 0 && token.getType() != 1 && token.getType() != 2) {
-            throw new SintaxeException("Numero ou identificador experado na linha: " + token.getLine() + " : " + token.getText());
+            SintaxeException("Numero ou identificador experado na linha: " + token.getLine() + " : " + token.getText());
 
         }
         pos++;
@@ -62,49 +63,77 @@ public class isParser {
 
     private void OP() {
         if (token.getType() != 18 && token.getType() != 19 && token.getType() != 20 && token.getType() != 21) {
-            throw new SintaxeException("Operador inválido, na linha: " + token.getLine() + ": " + token.getText());
+            SintaxeException("Operador inválido, na linha: " + token.getLine() + ": " + token.getText());
         }
     }
 
     //VERIFICANDO DECLARAÇÃO DE VARIÁVEIS
     public void VarDeclaration() {
         token = listaDeTokens.get(pos);
-        if (modifiers.contains(token.getText())) {
-            Modifiers();
-            pos--;
+        if (!typesFunc.contains(token.getText())) {
+            do{
+                if(listaDeTokens.get(pos+1).getType()!=9){
+                                        modifier(); 
+                }else{
+                    TypeFunc();
+                    pos++;
+                }
+              
+            }while(!typesFunc.contains(listaDeTokens.get(pos).getText()));
+          //  pos--;
         }
-
-        Type();
+       
         Identifier();
+       if(listaDeTokens.get(pos+1).getType()!=9){
+            methodDef();
+            methodBody();
+       }else{
         semicolun();
+       }
     }
 
     private void Type() {
         token = listaDeTokens.get(pos);
         pos++;
         if (!types.contains(token.getText())){
-            throw new SintaxeException("Tipo de dados invalido: " + token.getLine() + " : " + token.getText());
+            SintaxeException("Tipo de dados invalido: " + token.getLine() + " : " + token.getText());
         }
     }
     private void TypeFunc() {
+        if(token.getType()==0){
+            pos--;
+        }
         token = listaDeTokens.get(pos);
         pos++;
         if (!typesFunc.contains(token.getText())){
-            throw new SintaxeException("Tipo de dados invalido: " + token.getLine() + " : " + token.getText());
+            SintaxeException("Tipo de dados invalido na linha: " + token.getLine());
         }
+        
     }
 
     private void Identifier() {
+        pos++;
         token = listaDeTokens.get(pos);
         if (token.getType() != 0) {
-            throw new SintaxeException("Identificador inválido: " + token.getLine() + " : " + token.getText());
-
+            SintaxeException("Identificador inválido na linha: " + token.getLine());
+            
+        }
+    }
+    
+    String err = "";
+     private void error(String msg) {
+        pos++;
+        token = listaDeTokens.get(pos);
+        if(!err.equals(msg)){
+            SintaxeException(msg);
+            err=msg;
         }
     }
 
     //VERIFICANDO O PACKAGE
     public void packegeFunc() {
         Package();
+        pos--;
         Identifier();
         semicolun();
     }
@@ -114,7 +143,7 @@ public class isParser {
         token = listaDeTokens.get(pos);
         pos++;
         if (!"package".equals(token.getText())) {
-            throw new SintaxeException("Esperava a declaração do pacote na linha " + token.getLine() + " encontrei : " + token.getText());
+            SintaxeException("Esperava a declaração do pacote na linha " + token.getLine());
         }
     }
 
@@ -122,7 +151,7 @@ public class isParser {
         pos++;
         token = listaDeTokens.get(pos);
         if (token.getType() != 9) {
-            throw new SintaxeException("Esperava um ponto e vírgula no final na linha " + token.getLine() + " encontrei : " + token.getText());
+           SintaxeException("Esperava um ponto e vírgula no final na linha " + token.getLine());
         }
     }
 
@@ -130,7 +159,7 @@ public class isParser {
         pos++;
         token = listaDeTokens.get(pos);
         if (token.getType() != 11) {
-            throw new SintaxeException("Esperava um vírgula na linha " + token.getLine() + " encontrei : " + token.getText());
+            SintaxeException("Esperava um vírgula na linha " + token.getLine());
         }
     }
 
@@ -139,7 +168,7 @@ public class isParser {
         token = listaDeTokens.get(pos);
         pos++;
         if (token.getType() != 10) {
-            throw new SintaxeException("Esperava um ponto na linha " + token.getLine() + " encontrei : " + token.getText());
+          SintaxeException("Esperava um ponto na linha " + token.getLine());
         }
     }
 
@@ -155,16 +184,18 @@ public class isParser {
         token = listaDeTokens.get(pos);
         pos++;
         if (!"import".equals(token.getText())) {
-            throw new SintaxeException("Esperava a declaração do import na linha " + token.getLine() + " encontrei : " + token.getText());
+           SintaxeException("Esperava a declaração do import na linha " + token.getLine());
         }
     }
 
     private void ImportIdentifier() {
         token = listaDeTokens.get(pos);
         if (token.getType() == 0) {
+            pos--;
             Identifier();
         } else {
-            throw new SintaxeException("Esperava um identificador na linha " + token.getLine() + " encontrei : " + token.getText());
+            SintaxeException("Esperava um identificador na linha " + token.getLine());
+           
         }
         pos++;
         token = listaDeTokens.get(pos);
@@ -185,22 +216,24 @@ public class isParser {
 
     private void modifier() {
         token = listaDeTokens.get(pos);
-        pos++;
-        if (!modifiers.contains(token.getText())) {
-            throw new SintaxeException("Esperava um modificador valido na linha " + token.getLine() + " encontrei : " + token.getText());
-        }
-        // if(modifiers.contains(token.getText())){
-        //     modifiers = modifiers.replaceAll(token.getText(), "");
-        // }
+        if(!typesFunc.contains(token.getText()) && !token.getText().equals("class")){
+            if (!modifiers.contains(token.getText())) {
+              SintaxeException("existe modificador invalido na linha " + token.getLine());
+               pos++;
+            }else{
+               pos++;
+            }
+      }
+
     }
 
     private void ml() {
-        if (listaDeTokens.get(pos).getType() != 0 && !"int".equals(listaDeTokens.get(pos).getText())
-                && !"interface".equals(listaDeTokens.get(pos).getText()) && !"class".equals(listaDeTokens.get(pos).getText())
-                && !"void".equals(listaDeTokens.get(pos).getText())) {
+        token = listaDeTokens.get(pos);
+        if (!typesFunc.contains(token.getText()) && token.getType()!=0) {
             modifier();
             ml();
         }
+               
     }
 
     //Verificando Interface
@@ -216,10 +249,12 @@ public class isParser {
     private void Interface() {
         token = listaDeTokens.get(pos);
         if (!token.getText().equals("interface")) {
-            throw new SintaxeException("Esperava a delcaracao de interface na linha " + token.getLine() + " encontrei : " + token.getText());
+             SintaxeException("Esperava a delcaracao de interface na linha " + token.getLine());
+             pos++;
         } else {
             pos++;
         }
+        pos--;
         Identifier();
         if (listaDeTokens.get(pos + 1).getText().equals("extends")) {
             pos++;
@@ -231,7 +266,7 @@ public class isParser {
 
     private void interfaceBody() {
         abrirChaves();    
-        do{
+       /* do{
               if (modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() != 0) {
                     int i = pos;
 
@@ -271,7 +306,21 @@ public class isParser {
              VarDeclaration(); 
           }
            
-        } while (listaDeTokens.get(pos + 1).getType() != 13);
+        } while (listaDeTokens.get(pos + 1).getType() != 13);*/
+      
+        while (listaDeTokens.get(pos + 1).getType() != 13){
+            //METODOS COM MODIFICADORES
+            
+            if ((modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() == 0 && listaDeTokens.get(pos + 3).getType() == 7)
+                    || (listaDeTokens.get(pos + 1).getType() == 0 && listaDeTokens.get(pos + 2).getType() == 7)) {
+                pos++;
+                constructFunc();
+            }else{
+                pos++;
+                VarDeclaration();
+            }
+        }
+        
         fecharChaves();
     }
 
@@ -279,8 +328,7 @@ public class isParser {
         pos++;
         token = listaDeTokens.get(pos);
         if (token.getType() != 12) {
-            throw new SintaxeException("Esperava abrir chaves na linha " + token.getLine() + " encontrei : " + token.getText());
-
+           SintaxeException("Esperava abrir chaves na linha " + token.getLine());
         }
     }
 
@@ -289,31 +337,35 @@ public class isParser {
         if (pos < listaDeTokens.size()) {
             token = listaDeTokens.get(pos);
             if (token.getType() != 13) {
-                throw new SintaxeException("Esperava fechar chaves na linha " + token.getLine() + " encontrei : " + token.getText());
+              SintaxeException("Esperava fechar chaves na linha " + token.getLine());
 
             }
         } else {
-            throw new SintaxeException("Esperava fechar chaves na linha " + token.getLine());
+         SintaxeException("Esperava fechar chaves na linha " + token.getLine());
         }
     }
 
     private void Extends() {
         token = listaDeTokens.get(pos);
         if (!token.getText().equals("extends")) {
-            throw new SintaxeException("Esperava extends na linha " + token.getLine() + " encontrei : " + token.getText());
+           SintaxeException("Esperava extends na linha " + token.getLine());
+           pos++;
         } else {
             pos++;
         }
+        pos--;
         Identifier();
     }
 
     public void Implements() {
         token = listaDeTokens.get(pos);
         if (!token.getText().equals("implements")) {
-            throw new SintaxeException("Esperava implements na linha " + token.getLine() + " encontrei : " + token.getText());
+           SintaxeException("Esperava implements na linha " + token.getLine());
+           pos++;
         } else {
             pos++;
         }
+        pos--;
         Identifier();
     }
 
@@ -324,12 +376,9 @@ public class isParser {
     }
 
     private void Class() {
-    
         token = listaDeTokens.get(pos);
         if (!token.getText().equals("class")) {
-            throw new SintaxeException("Esperava class na linha " + token.getLine() + " encontrei : " + token.getText());
-        } else {
-            pos++;
+            SintaxeException("Esperava class na linha " + token.getLine());
         }
         Identifier();
 
@@ -348,48 +397,20 @@ public class isParser {
     private void ClassBody() {
         abrirChaves();
 
-        do {
+       while (listaDeTokens.get(pos + 1).getType() != 13){
             //METODOS COM MODIFICADORES
-            if ((modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() == 0)
-                    || listaDeTokens.get(pos + 1).getType() == 0) {
+            
+            if ((modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() == 0 && listaDeTokens.get(pos + 3).getType() == 7)
+                    || (listaDeTokens.get(pos + 1).getType() == 0 && listaDeTokens.get(pos + 2).getType() == 7)) {
                 pos++;
                 constructFunc();
-            }
-            
-            else if (modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() != 0) {
-                int i = pos;
-                do {
-                    i++;
-                } while (listaDeTokens.get(i).getType() != 0);
-
-                if (listaDeTokens.get(i + 1).getType() == 7) {
-                    pos++;
-                    MethodFunc();
-                } else {
-                    pos++;
-                    VarDeclaration();
-                }
-            }
-         //METODOS E DECLARACOES SEM MODIFICADORES DE ACESSO
-           else if (types.contains(listaDeTokens.get(pos + 1).getText())
-                    && listaDeTokens.get(pos + 2).getType() == 0
-                    && listaDeTokens.get(pos + 3).getType() != 7) {
+            }else{
+                System.out.println("HAY");
                 pos++;
                 VarDeclaration();
             }
-
-           else if (typesFunc.contains(listaDeTokens.get(pos + 1).getText())
-                    && listaDeTokens.get(pos + 2).getType() == 0
-                    && listaDeTokens.get(pos + 3).getType() != 9) {
-                pos++;
-                MethodFunc();
-            }
-           else{
-               pos++;
-               VarDeclaration();
-           }   
-        } while (listaDeTokens.get(pos + 1).getType() != 13);
-
+        }
+        
         fecharChaves();
     }
 
@@ -417,9 +438,10 @@ public class isParser {
     private void Throws() {
         token = listaDeTokens.get(pos);
         if (!token.getText().equals("throws")) {
-            throw new SintaxeException("Esperava throws na linha " + token.getLine() + " encontrei : " + token.getText());
+           SintaxeException("Esperava throws na linha " + token.getLine());
+           pos++;
         }
-        pos++;
+        pos--;
         Identifier();
     }
     
@@ -431,7 +453,7 @@ public class isParser {
                         
             abrirChaves();
             
-            try{
+           /* try{
             
             do{
                 //VARIAVEL LOCAL
@@ -445,8 +467,21 @@ public class isParser {
             } while (listaDeTokens.get(pos + 1).getType() != 13);
             
             }catch(Exception e){
-                fecharChaves(); 
+               // fecharChaves(); 
+            }*/
+            while (listaDeTokens.get(pos + 1).getType() != 13){
+            //METODOS COM MODIFICADORES
+            
+            if ((modifiers.contains(listaDeTokens.get(pos + 1).getText()) && listaDeTokens.get(pos + 2).getType() == 0 && listaDeTokens.get(pos + 3).getType() == 7)
+                    || (listaDeTokens.get(pos + 1).getType() == 0 && listaDeTokens.get(pos + 2).getType() == 7)) {
+                pos++;
+                constructFunc();
+            }else{
+                pos++;
+                VarDeclaration();
             }
+            }
+        
             
             fecharChaves(); 
         }
@@ -455,6 +490,7 @@ public class isParser {
     }
 
     private void methodDef() {
+        pos--;
         Identifier();
         AbrirParenteses();
         if (listaDeTokens.get(pos + 1).getType() == 5) {
@@ -469,7 +505,7 @@ public class isParser {
         pos++;
         token = listaDeTokens.get(pos);
         if (token.getType() != 7) {
-            throw new SintaxeException("Esperava abrir parenteses na linha " + token.getLine() + " encontrei : " + token.getText());
+          SintaxeException("Esperava abrir parenteses na linha " + token.getLine());
 
         }
     }
@@ -478,7 +514,7 @@ public class isParser {
         pos++;
         token = listaDeTokens.get(pos);
         if (token.getType() != 8) {
-            throw new SintaxeException("Esperava fechar parenteses na linha " + token.getLine() + " encontrei : " + token.getText());
+         SintaxeException("Esperava fechar parenteses na linha " + token.getLine());
 
         }
     }
@@ -501,25 +537,40 @@ public class isParser {
 
     private void Param() {
         Type();
+        pos--;
         Identifier();
         pos++;
     }
 
     //VERIFICANDO CONSTRUTOR
     public void constructFunc() {
-        if (modifiers.contains(listaDeTokens.get(pos).getText())) {
+        token = listaDeTokens.get(pos);
+        if (modifiers.contains(listaDeTokens.get(pos).getText()) && listaDeTokens.get(pos+1).getType()==0) {
             modifier();
-        }
-        Construct();
-        if ("throws".equals(listaDeTokens.get(pos + 1).getText())) {
-            pos++;
-            Throws();
-        }
+            Construct();
+            if ("throws".equals(listaDeTokens.get(pos + 2).getText())) {
+                    pos++;
+                    Throws();
+            }
 
-        constructBody();
+            constructBody();
+        }
+        else if(listaDeTokens.get(pos).getType()==0 && listaDeTokens.get(pos+1).getType()==7){
+            Construct();
+             if ("throws".equals(listaDeTokens.get(pos + 1).getText())) {
+                    pos++;
+                    Throws();
+            }
+
+            constructBody();
+        }else{
+            SintaxeException("Sintaxe para construtor errada na linha "+token.getLine());
+        }
+       
     }
 
     private void Construct() {
+        pos--;
         Identifier();
         AbrirParenteses();
         if (listaDeTokens.get(pos + 1).getType() == 5) {
@@ -543,14 +594,14 @@ public class isParser {
         token = listaDeTokens.get(pos);
         while (true) {
 
-            if (token.getText().equals("package")) {
+            if (token.getText().contains("package")) {
                 do {
                     packegeFunc();
                 } while (token.getType() != 9);
                 callTheNext();
             }
 
-           else if (token.getText().equals("import")) {
+           else if (token.getText().contains("import")) {
                 do {
                     importFunc();
                 } while (token.getType() != 9);
@@ -560,23 +611,27 @@ public class isParser {
            else if (modifiers.contains(token.getText())) {
                 if (listaDeTokens.get(pos + 1).getText().equals("class")) {
                     do {
-                        classFunc();
+                        classFunc();   
                     } while (token.getType() != 13);
                     callTheNext();
-                }else{
-                   throw new SintaxeException("Palavra não reconhecida na linha: "+token.getLine());   
+                }
+                
+                else{
+                 classFunc();
                 }
 
             }
             
-          else  if(token.getText().equals("interface")){
+          else  if(token.getText().contains("interface")){
                 do{
                     interfaceFunc(); 
                 }while(token.getType() != 13);
                 callTheNext();
             }
           else{
-              throw new SintaxeException("Palavra não reconhecida na linha: "+token.getLine());  
+              pos--;
+              error("Palavra não reconhecida na linha "+token.getLine());
+              callTheNext();
           }
 
         }
